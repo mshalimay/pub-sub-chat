@@ -1,0 +1,45 @@
+I tested part4 by running 5 different command lines
+
+1) Navigate to the part4 folder
+
+2) Open CMD 1 and run:
+ python mc_server.py 0.0.0.0 9000 9001
+
+This will deploy the multichannel server, listening to messages in port 9000 and publishing messages in port 9001
+
+
+3) Open CMD 2 and run:
+ python3 mc_client.py 0.0.0.0 9000 9001 all moises
+
+This will launch a client that listen to all channels, but is unable to send messages.
+
+
+4) Open CMD 3 and run:
+
+ python3 mc_client.py 0.0.0.0 9000 9001 sports amanda
+
+This will launch a client that listen and send messages to the 'sports' channel
+
+
+5) Open CMD 4 and run:
+
+ python3 mc_client.py 0.0.0.0 9000 9001 sports chard
+
+This will launch another client that listen and send messages to the 'sports' channel
+
+
+6) Open CMD 5 and run:
+
+ python3 mc_client.py 0.0.0.0 9000 9001 news john
+
+This will launch aclient that listen and send messages to the 'news' channel
+
+Now to test the functionality:
+1) Send a "hi" using CMD 3 and "hello" using CMD 4. You should see both messages in both consoles AND in CMD2 (the "all" channel) 
+but not in CMD 5, since this client only listen to 'news' channel
+
+2) Send "world" using CMD 5. You should see "world" in CMD5 and CMD2 (the "all" channel), but not in CMD 3 and 4,
+since these clients only listen to 'sports' channel
+
+3) Try sending a message using CMD 2. You should see no message in none of the consoles, since this client signed for all channels and is read-only
+
